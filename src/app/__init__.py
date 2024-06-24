@@ -1,0 +1,2 @@
+THIS_SERVICE_NAME = "prueba-service"
+SERVICE_VERSION = "1.0.1"
