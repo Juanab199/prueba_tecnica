@@ -1,14 +1,30 @@
-from pydantic import BaseModel, field_validator
+from typing import Optional
+from pydantic import BaseModel
 
-class Product:
+class Product(BaseModel):
     sku: str
     name: str
-    stock: int
+    stock: Optional[int] = 100
     
-    @field_validator("stock", always=True)
-    def check_stock(cls, stock:str):
-        pass
+    class Config:
+        orm_mode = True
+        schema_extra = {
+            "ejemplo": {
+                "sku": "1001A",
+                "name": "nombre del producto",
+                "stock": "stock inicial por defecto 100"
+            }
+        }
     
-class Order:
-    product_i: str
+class Order(BaseModel):
+    product_id: str
     quantity: int
+    
+    class Config:
+        orm_mode = True
+        schema_extra = {
+            "ejemplo": {
+                "peoduct_id": "1001A",
+                "quantity": "1000",
+            }
+        }
