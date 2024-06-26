@@ -1,9 +1,10 @@
 from typing import Optional
 from pydantic import BaseModel
 
-class Product(BaseModel):
+class ProductSch(BaseModel):
     sku: str
     name: str
+    price: float
     stock: Optional[int] = 100
     
     class Config:
@@ -16,7 +17,7 @@ class Product(BaseModel):
             }
         }
     
-class Order(BaseModel):
+class OrderSch(BaseModel):
     product_id: str
     quantity: int
     
