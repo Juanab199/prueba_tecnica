@@ -3,7 +3,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-DATABASE_URL = os.getenv("DATABASEURL")
+from app.config.conf import load_env_vars
+
+DATABASE_URL = load_env_vars().get("DATABASEURL")
 
 engine = create_engine(
     DATABASE_URL
