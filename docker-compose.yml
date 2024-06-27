@@ -1,0 +1,31 @@
+services:
+  database-service:
+    image: "postgres" 
+    env_file:
+      - ./database/database.env
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    networks:
+      - app-tier
+    container_name: postgresql_service
+
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database-service
+    env_file:
+      - ./database/database.env 
+    volumes:
+      - .:/app
+    networks:
+      - app-tier
+
+volumes:
+  database-data:
+
+networks:
+  app-tier:
